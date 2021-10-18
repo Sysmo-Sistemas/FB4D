@@ -343,6 +343,9 @@ type
     function GetMapType(const FieldName: string;
       Index: integer): TFirestoreFieldType;
     function GetMapValue(const FieldName: string; Index: integer): TJSONValue;
+      overload;
+    function GetMapValue(const FieldName, SubFieldName: string): TJSONObject;
+      overload;
     function GetMapValues(const FieldName: string): TJSONObjects;
     function AddOrUpdateField(Field: TJSONPair): IFirestoreDocument; overload;
     function AddOrUpdateField(const FieldName: string;
@@ -449,7 +452,7 @@ type
       OnError: TOnRequestError; OnAuthRevoked: TOnAuthRevokedEvent = nil;
       OnConnectionStateChange: TOnConnectionStateChange = nil;
       DoNotSynchronizeEvents: boolean = false);
-    procedure StopListener;
+    procedure StopListener(RemoveAllSubscription: boolean = true);
     function GetTimeStampOfLastAccess: TDateTime;
     // Transaction
     procedure BeginReadOnlyTransaction(OnBeginTransaction: TOnBeginTransaction;
