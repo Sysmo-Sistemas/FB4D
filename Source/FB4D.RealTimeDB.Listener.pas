@@ -188,6 +188,7 @@ procedure TRTDBListenerThread.Execute;
 var
   WaitRes: TWaitResult;
   LastWait: TDateTime;
+  ErrMsg: string;
 begin
   try
     InitListen(true);
@@ -252,7 +253,7 @@ begin
     on e: exception do
       if assigned(fOnListenError) then
       begin
-        var ErrMsg := e.Message;
+        ErrMsg := e.Message;
         if fDoNotSynchronizeEvents then
           fOnListenError(fRequestID, ErrMsg)
         else
